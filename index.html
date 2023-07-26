@@ -1,9 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>インタラクティブなサイネージ　v1.0</title>
+  <title>インタラクティブなサイネージ</title>
   <meta charset="UTF-8">
   <style>
+    /* 以下の2つのスタイルを追加 */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    #center-text {
+      font-size: 2em;
+      font-weight: bold;
+    }
     #name {
       position: absolute;
     }
@@ -17,6 +29,9 @@
   </style>
 </head>
 <body>
+  <!-- テキストを中央に表示する部分を追加 -->
+  <div id="center-text">Flat Fri Members</div>
+
   <div id="name"></div>
 
   <div class="popup" id="popup">
@@ -24,7 +39,6 @@
     <p id="identity"></p>
     <p id="affiliation"></p>
   </div>
-
   <script>
     // サンプルデータ（仮定）
     const data = [
