@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>インタラクティブなサイネージv2.0</title>
+  <title>インタラクティブなサイネージv2.1</title>
   <meta charset="UTF-8">
   <style>
     body {
@@ -14,15 +14,21 @@
     #center-text {
       font-size: 2em;
       font-weight: bold;
+      display: none;
+      animation: fadeInAndOut 8.5s infinite; /* 8.5秒かけてフェードイン・アウトを行う */
+    }
+    @keyframes fadeInAndOut {
+      0%, 100% { opacity: 0; } /* 0秒と8.5秒の時点で透明 */
+      10%, 90% { opacity: 1; } /* 0.85秒と7.65秒の時点で完全に表示 */
     }
     #name {
       position: absolute;
       opacity: 0;
-      animation: fadeInOutAndMove 9.5s infinite; /* 9.5秒かけてフェードイン・アウトと位置の移動を行う */
+      animation: fadeInAndOutAndMove 8.5s infinite; /* 8.5秒かけてフェードイン・アウトと位置の移動を行う */
     }
-    @keyframes fadeInOutAndMove {
-      0%, 100% { opacity: 0; } /* 0秒と9.5秒の時点で透明 */
-      10%, 90% { opacity: 1; } /* 0.95秒と8.55秒の時点で完全に表示 */
+    @keyframes fadeInAndOutAndMove {
+      0%, 100% { opacity: 0; } /* 0秒と8.5秒の時点で透明 */
+      10%, 90% { opacity: 1; } /* 0.85秒と7.65秒の時点で完全に表示 */
       10%, 90% {
         top: calc(Math.random() * (100vh - 2em)); /* ランダムな位置に変更 */
         left: calc(Math.random() * (100vw - 5em)); /* ランダムな位置に変更 */
@@ -100,7 +106,7 @@
 
     // 一定の間隔でランダムな名前を表示する処理
     displayRandomName();
-    setInterval(displayRandomName, 9500); // 9500ミリ秒ごとに更新（9.5秒）
+    setInterval(displayRandomName, 8500); // 8500ミリ秒ごとに更新（8.5秒）
   </script>
 </body>
 </html>
