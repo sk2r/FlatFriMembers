@@ -12,9 +12,17 @@
       align-items: center;
       font-size: 2em;
       font-weight: bold;
+      position: relative; /* 追加 */
     }
     .name-container {
       position: absolute;
+      top: 0; /* 追加 */
+      left: 0; /* 追加 */
+      width: 100%; /* 追加 */
+      height: 100%; /* 追加 */
+      display: flex; /* 追加 */
+      justify-content: center; /* 追加 */
+      align-items: center; /* 追加 */
     }
     .name {
       display: none;
@@ -56,12 +64,13 @@
     // 初期表示でランダムな名前を30個まとめて表示
     function displayRandomNames() {
       const nameContainer = document.querySelector(".name-container");
-      nameContainer.innerHTML = "";
+      nameContainer.innerHTML = ""; // 一度全てクリアする
       const randomNames = getRandomNames();
       randomNames.forEach((person) => {
         const nameElement = document.createElement("div");
         nameElement.innerText = person.name;
         nameElement.classList.add("name");
+        nameElement.style.position = "absolute"; // 追加
         nameElement.style.left = Math.random() * (window.innerWidth - nameElement.clientWidth) + "px";
         nameElement.style.top = Math.random() * (window.innerHeight - nameElement.clientHeight) + "px";
         nameElement.addEventListener("click", showPopup);
