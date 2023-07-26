@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>インタラクティブなサイネージ</title>
+  <style>
+    #name {
+      position: absolute;
+    }
+    .popup {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="name">名前</div>
+
+  <div class="popup" id="popup">
+    <p id="registrationNumber"></p>
+    <p id="identity"></p>
+    <p id="affiliation"></p>
+  </div>
+
+  <script>
+    // サンプルデータ（仮定）
+    const data = [
+      { registrationNumber: 1, name: "山田太郎", identity: "社員", affiliation: "営業部" },
+      { registrationNumber: 2, name: "佐藤花子", identity: "社員", affiliation: "総務部" },
+      // 他のデータ
+    ];
+
+    // 表示されている名前をクリック（またはタップ）したときの処理
+    document.getElementById("name").addEventListener("click", showPopup);
+
+    function showPopup() {
+      // ランダムに位置を変更する
+      const nameElement = document.getElementById("name");
+      nameElement.style.left = Math.random() * (window.innerWidth - nameElement.clientWidth) + "px";
+      nameElement.style.top = Math.random() * (window.innerHeight - nameElement.clientHeight) + "px";
+
+      // ポップアップを表示する
+      const popup = document.getElementById("popup");
+      popup.style.display = "block";
+
+      // クリック（またはタップ）した名前に対応するデータを取得
+      const clickedName = nameElement.innerText;
+      const personData = data.find((person) => person.name === clickedName);
+
+      // ポップアップにデータを表示
+      const registrationNumberElement = document.getElementById("registrationNumber");
+      const identityElement = document.getElementById("identity");
+      const affiliationElement = document.getElementById("affiliation");
+
+      registrationNumberElement.innerText = "登録番号：" + personData.registrationNumber;
+      identityElement.innerText = "身分：" + personData.identity;
+      affiliationElement.innerText = "所属：" + personData.affiliation;
+    }
+
+    // ポップアップ外をクリック（またはタップ）したときの処理
+    document.body.addEventListener("click", closePopup);
+
+    function closePopup(event) {
+      const popup = document.getElementById("popup");
+
+      // ポップアップ外をクリック（またはタップ）した場合はポップアップを閉じる
+      if (event.target !== popup && event.target !== document.getElementById("name")) {
+        popup.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
