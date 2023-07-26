@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>インタラクティブなサイネージ　v1.3</title>
+  <title>インタラクティブなサイネージ</title>
   <meta charset="UTF-8">
   <style>
     body {
@@ -17,13 +17,14 @@
     }
     #name {
       position: absolute;
-      opacity: 0; /* 初期は非表示にする */
-      animation: fadeInOut 2s infinite; /* アニメーションを適用 */
+      opacity: 0;
+      animation: fadeInOut 5s infinite; /* アニメーションを適用、5秒かけてフェードイン・アウト */
     }
     @keyframes fadeInOut {
       0% { opacity: 0; } /* 0秒の時点で透明 */
-      50% { opacity: 1; } /* 1秒の時点で完全に表示 */
-      100% { opacity: 0; } /* 2秒の時点で透明 */
+      40% { opacity: 1; } /* 2秒の時点で完全に表示 */
+      60% { opacity: 1; } /* 3秒の時点でも表示 */
+      100% { opacity: 0; } /* 5秒の時点で透明 */
     }
     .popup {
       display: none;
@@ -44,6 +45,7 @@
     <p id="identity"></p>
     <p id="affiliation"></p>
   </div>
+
 
   <script>
     // サンプルデータ（仮定）
