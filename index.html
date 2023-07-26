@@ -56,27 +56,22 @@
       // 他のデータ
     ];
 
-    // ランダムな名前を30個取得する関数
-    function getRandomNames() {
-      const shuffledData = data.slice().sort(() => 0.5 - Math.random());
-      return shuffledData.slice(0, 30);
-    }
-
-    // 初期表示でランダムな名前を30個まとめて表示
-    function displayRandomNames() {
+    // 初期表示でランダムな名前を1つだけ表示
+    function displayRandomName() {
       const nameContainer = document.querySelector(".name-container");
       nameContainer.innerHTML = ""; // 一度全てクリアする
-      const randomNames = getRandomNames();
-      randomNames.forEach((person) => {
-        const nameElement = document.createElement("div");
-        nameElement.innerText = person.name;
-        nameElement.classList.add("name");
-        nameElement.style.position = "absolute";
-        nameElement.style.left = Math.random() * (window.innerWidth - nameElement.clientWidth) + "px";
-        nameElement.style.top = Math.random() * (window.innerHeight - nameElement.clientHeight) + "px";
-        nameElement.addEventListener("click", showPopup);
-        nameContainer.appendChild(nameElement);
-      });
+      const randomIndex = Math.floor(Math.random() * data.length);
+      const randomName = data[randomIndex].name;
+
+      const nameElement = document.createElement("div");
+      nameElement.innerText = randomName;
+      nameElement.classList.add("name");
+      nameElement.style.position = "absolute";
+      nameElement.style.left = Math.random() * (window.innerWidth - nameElement.clientWidth) + "px";
+      nameElement.style.top = Math.random() * (window.innerHeight - nameElement.clientHeight) + "px";
+      nameElement.addEventListener("click", showPopup);
+      nameContainer.appendChild(nameElement);
+
       hidePopup();
     }
 
@@ -107,8 +102,8 @@
     }
 
     // 初回の名前表示と一定の間隔で名前を更新
-    displayRandomNames();
-    setInterval(displayRandomNames, 10000); // 10000ミリ秒ごとに更新（10秒）
+    displayRandomName();
+    setInterval(displayRandomName, 10000); // 10000ミリ秒ごとに更新（10秒）
   </script>
 </body>
 </html>
