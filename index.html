@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>インタラクティブなサイネージ　v1.7</title>
+  <title>インタラクティブなサイネージv1.8</title>
   <meta charset="UTF-8">
   <style>
     body {
@@ -18,18 +18,14 @@
     #name {
       position: absolute;
       opacity: 0;
-      animation: fadeInOutAndMove 10s infinite; /* 10秒かけてフェードイン・アウトと位置の移動を行う */
+      animation: fadeInOutAndMove 8.5s infinite; /* 8.5秒かけてフェードイン・アウトと位置の移動を行う */
     }
     @keyframes fadeInOutAndMove {
-      0%, 100% { opacity: 0; } /* 0秒と10秒の時点で透明 */
-      20%, 80% { opacity: 1; } /* 2秒と8秒の時点で完全に表示 */
-      0%, 100% {
-        top: calc(Math.random() * (100vh - 2em));
-        left: calc(Math.random() * (100vw - 5em));
-      }
-      20%, 80% {
-        top: calc(Math.random() * (100vh - 2em));
-        left: calc(Math.random() * (100vw - 5em));
+      0%, 100% { opacity: 0; } /* 0秒と8.5秒の時点で透明 */
+      10%, 90% { opacity: 1; } /* 0.85秒と7.65秒の時点で完全に表示 */
+      10%, 90% {
+        top: calc(Math.random() * (100vh - 2em)); /* ランダムな位置に変更 */
+        left: calc(Math.random() * (100vw - 5em)); /* ランダムな位置に変更 */
       }
     }
     .popup {
@@ -104,7 +100,7 @@
 
     // 一定の間隔でランダムな名前を表示する処理
     displayRandomName();
-    setInterval(displayRandomName, 10000); // 10000ミリ秒ごとに更新（10秒）
+    setInterval(displayRandomName, 8500); // 8500ミリ秒ごとに更新（8.5秒）
   </script>
 </body>
 </html>
