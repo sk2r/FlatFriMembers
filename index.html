@@ -12,18 +12,18 @@
       align-items: center;
       font-size: 2em;
       font-weight: bold;
-      position: relative; /* 追加 */
+      position: relative;
     }
     .name-container {
       position: absolute;
-      top: 0; /* 追加 */
-      left: 0; /* 追加 */
-      width: 100%; /* 追加 */
-      height: 100%; /* 追加 */
-      display: flex; /* 追加 */
-      flex-wrap: wrap; /* 追加 */
-      justify-content: center; /* 追加 */
-      align-items: center; /* 追加 */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
     }
     .name {
       display: none;
@@ -71,7 +71,7 @@
         const nameElement = document.createElement("div");
         nameElement.innerText = person.name;
         nameElement.classList.add("name");
-        nameElement.style.position = "absolute"; // 追加
+        nameElement.style.position = "absolute";
         nameElement.style.left = Math.random() * (window.innerWidth - nameElement.clientWidth) + "px";
         nameElement.style.top = Math.random() * (window.innerHeight - nameElement.clientHeight) + "px";
         nameElement.addEventListener("click", showPopup);
