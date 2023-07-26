@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>インタラクティブなサイネージ v1.6</title>
+  <title>インタラクティブなサイネージ　v1.7</title>
   <meta charset="UTF-8">
   <style>
     body {
@@ -18,18 +18,16 @@
     #name {
       position: absolute;
       opacity: 0;
-      animation: fadeInOut 10s infinite, movePosition 10s infinite; /* 10秒かけてフェードイン・アウトと位置の移動を行う */
+      animation: fadeInOutAndMove 10s infinite; /* 10秒かけてフェードイン・アウトと位置の移動を行う */
     }
-    @keyframes fadeInOut {
+    @keyframes fadeInOutAndMove {
       0%, 100% { opacity: 0; } /* 0秒と10秒の時点で透明 */
       20%, 80% { opacity: 1; } /* 2秒と8秒の時点で完全に表示 */
-    }
-    @keyframes movePosition {
-      0%, 100% { /* 0秒と10秒の時点で位置をランダムに設定 */
+      0%, 100% {
         top: calc(Math.random() * (100vh - 2em));
         left: calc(Math.random() * (100vw - 5em));
       }
-      20%, 80% { /* 2秒と8秒の時点で位置を固定 */
+      20%, 80% {
         top: calc(Math.random() * (100vh - 2em));
         left: calc(Math.random() * (100vw - 5em));
       }
@@ -72,8 +70,6 @@
     function displayRandomName() {
       const nameElement = document.getElementById("name");
       nameElement.innerText = getRandomName();
-      nameElement.style.left = Math.random() * (window.innerWidth - nameElement.clientWidth) + "px";
-      nameElement.style.top = Math.random() * (window.innerHeight - nameElement.clientHeight) + "px";
       hidePopup();
     }
 
@@ -108,7 +104,7 @@
 
     // 一定の間隔でランダムな名前を表示する処理
     displayRandomName();
-    setInterval(displayRandomName, 3000); // 3000ミリ秒ごとに更新（3秒）
+    setInterval(displayRandomName, 10000); // 10000ミリ秒ごとに更新（10秒）
   </script>
 </body>
 </html>
