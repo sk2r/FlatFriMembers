@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>インタラクティブなサイネージ</title>
-  <meta charset="UTF-8"> <!-- UTF-8の文字コードを指定 -->
+  <meta charset="UTF-8">
   <style>
     #name {
       position: absolute;
@@ -17,7 +17,7 @@
   </style>
 </head>
 <body>
-  <div id="name">名前</div>
+  <div id="name"></div>
 
   <div class="popup" id="popup">
     <p id="registrationNumber"></p>
@@ -33,24 +33,32 @@
       // 他のデータ
     ];
 
-    // 表示されている名前をクリック（またはタップ）したときの処理
-    document.getElementById("name").addEventListener("click", showPopup);
+    // 表示する名前をランダムに選択する関数
+    function getRandomName() {
+      const randomIndex = Math.floor(Math.random() * data.length);
+      return data[randomIndex].name;
+    }
 
-    function showPopup() {
-      // ランダムに位置を変更する
+    // 名前を表示して、クリックしたらポップアップを表示する処理
+    function displayRandomName() {
       const nameElement = document.getElementById("name");
+      nameElement.innerText = getRandomName();
       nameElement.style.left = Math.random() * (window.innerWidth - nameElement.clientWidth) + "px";
       nameElement.style.top = Math.random() * (window.innerHeight - nameElement.clientHeight) + "px";
+      hidePopup();
+    }
 
-      // ポップアップを表示する
-      const popup = document.getElementById("popup");
-      popup.style.display = "block";
-
-      // クリック（またはタップ）した名前に対応するデータを取得
+    // ポップアップを表示する処理
+    function showPopup(event) {
+      const nameElement = document.getElementById("name");
       const clickedName = nameElement.innerText;
       const personData = data.find((person) => person.name === clickedName);
 
-      // ポップアップにデータを表示
+      const popup = document.getElementById("popup");
+      popup.style.display = "block";
+      popup.style.left = event.clientX + "px";
+      popup.style.top = event.clientY + "px";
+
       const registrationNumberElement = document.getElementById("registrationNumber");
       const identityElement = document.getElementById("identity");
       const affiliationElement = document.getElementById("affiliation");
@@ -60,17 +68,17 @@
       affiliationElement.innerText = "所属：" + personData.affiliation;
     }
 
-    // ポップアップ外をクリック（またはタップ）したときの処理
-    document.body.addEventListener("click", closePopup);
-
-    function closePopup(event) {
+    // ポップアップを非表示にする処理
+    function hidePopup() {
       const popup = document.getElementById("popup");
-
-      // ポップアップ外をクリック（またはタップ）した場合はポップアップを閉じる
-      if (event.target !== popup && event.target !== document.getElementById("name")) {
-        popup.style.display = "none";
-      }
+      popup.style.display = "none";
     }
+
+    // 名前をクリックしたらポップアップ表示の処理を実行
+    document.getElementById("name").addEventListener("click", showPopup);
+
+    // 一定の間隔でランダムな名前を表示する処理
+    setInterval(displayRandomName, 3000); // 3000ミリ秒ごとに更新（3秒）
   </script>
 </body>
 </html>
