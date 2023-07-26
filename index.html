@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>インタラクティブなサイネージ v1.5</title>
+  <title>インタラクティブなサイネージ v1.6</title>
   <meta charset="UTF-8">
   <style>
     body {
@@ -18,13 +18,21 @@
     #name {
       position: absolute;
       opacity: 0;
-      animation: fadeInOut 5s infinite; /* アニメーションを適用、5秒かけてフェードイン・アウト */
+      animation: fadeInOut 10s infinite, movePosition 10s infinite; /* 10秒かけてフェードイン・アウトと位置の移動を行う */
     }
     @keyframes fadeInOut {
-      0% { opacity: 0; } /* 0秒の時点で透明 */
-      40% { opacity: 1; } /* 2秒の時点で完全に表示 */
-      60% { opacity: 1; } /* 3秒の時点でも表示 */
-      100% { opacity: 0; } /* 5秒の時点で透明 */
+      0%, 100% { opacity: 0; } /* 0秒と10秒の時点で透明 */
+      20%, 80% { opacity: 1; } /* 2秒と8秒の時点で完全に表示 */
+    }
+    @keyframes movePosition {
+      0%, 100% { /* 0秒と10秒の時点で位置をランダムに設定 */
+        top: calc(Math.random() * (100vh - 2em));
+        left: calc(Math.random() * (100vw - 5em));
+      }
+      20%, 80% { /* 2秒と8秒の時点で位置を固定 */
+        top: calc(Math.random() * (100vh - 2em));
+        left: calc(Math.random() * (100vw - 5em));
+      }
     }
     .popup {
       display: none;
@@ -45,7 +53,6 @@
     <p id="identity"></p>
     <p id="affiliation"></p>
   </div>
-
 
   <script>
     // サンプルデータ（仮定）
