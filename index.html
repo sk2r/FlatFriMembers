@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>インタラクティブなサイネージv1.8</title>
+  <title>インタラクティブなサイネージv1.9</title>
   <meta charset="UTF-8">
   <style>
     body {
@@ -23,6 +23,10 @@
     @keyframes fadeInOutAndMove {
       0%, 100% { opacity: 0; } /* 0秒と8.5秒の時点で透明 */
       10%, 90% { opacity: 1; } /* 0.85秒と7.65秒の時点で完全に表示 */
+      0%, 100% {
+        top: calc(Math.random() * (100vh - 2em)); /* ランダムな位置に変更 */
+        left: calc(Math.random() * (100vw - 5em)); /* ランダムな位置に変更 */
+      }
       10%, 90% {
         top: calc(Math.random() * (100vh - 2em)); /* ランダムな位置に変更 */
         left: calc(Math.random() * (100vw - 5em)); /* ランダムな位置に変更 */
