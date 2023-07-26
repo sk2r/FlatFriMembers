@@ -26,6 +26,7 @@
       align-items: center;
     }
     .name {
+      position: absolute; /* 追加 */
       display: none;
     }
     .popup {
@@ -59,14 +60,12 @@
     // 初期表示でランダムな名前を1つだけ表示
     function displayRandomName() {
       const nameContainer = document.querySelector(".name-container");
-      nameContainer.innerHTML = ""; // 一度全てクリアする
       const randomIndex = Math.floor(Math.random() * data.length);
       const randomName = data[randomIndex].name;
 
       const nameElement = document.createElement("div");
       nameElement.innerText = randomName;
       nameElement.classList.add("name");
-      nameElement.style.position = "absolute";
       nameElement.style.left = Math.random() * (window.innerWidth - nameElement.clientWidth) + "px";
       nameElement.style.top = Math.random() * (window.innerHeight - nameElement.clientHeight) + "px";
       nameElement.addEventListener("click", showPopup);
