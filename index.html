@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>インタラクティブなサイネージ　v2.1</title>
+  <title>インタラクティブなサイネージ</title>
   <meta charset="UTF-8">
   <style>
     /* 以下の2つのスタイルを追加 */
@@ -16,7 +16,7 @@
       font-size: 2em;
       font-weight: bold;
     }
-    .name-container {
+    #name {
       position: absolute;
     }
     .popup {
@@ -32,7 +32,7 @@
   <!-- テキストを中央に表示する部分を追加 -->
   <div id="center-text">Flat Fri Members</div>
 
-  <div class="name-container" id="name-container"></div>
+  <div id="name"></div>
 
   <div class="popup" id="popup">
     <p id="registrationNumber"></p>
@@ -47,67 +47,52 @@
       // 他のデータ
     ];
 
-    let isPopupShown = false;
-
-    // 名前を表示してポップアップ表示の処理を開始
-    function displayRandomName() {
-      const nameContainer = document.getElementById("name-container");
-      const nameElement = document.createElement("div");
-      nameElement.className = "name";
-      nameElement.innerText = getRandomName();
-      nameContainer.appendChild(nameElement);
-
-      nameElement.addEventListener("click", showPopup);
-    }
-
     // 表示する名前をランダムに選択する関数
     function getRandomName() {
       const randomIndex = Math.floor(Math.random() * data.length);
       return data[randomIndex].name;
     }
 
-    // ポップアップを表示する処理
-    function showPopup(event) {
-      if (!isPopupShown) {
-        isPopupShown = true;
-        const clickedName = event.target.innerText;
-        const personData = data.find((person) => person.name === clickedName);
-
-        const popup = document.getElementById("popup");
-        popup.style.display = "block";
-        popup.style.left = event.clientX + "px";
-        popup.style.top = event.clientY + "px";
-
-        const registrationNumberElement = document.getElementById("registrationNumber");
-        const identityElement = document.getElementById("identity");
-        const affiliationElement = document.getElementById("affiliation");
-
-        registrationNumberElement.innerText = "登録番号：" + personData.registrationNumber;
-        identityElement.innerText = "身分：" + personData.identity;
-        affiliationElement.innerText = "所属：" + personData.affiliation;
-
-        // クリックした名前の動作を停止
-        const names = document.getElementsByClassName("name");
-        for (const name of names) {
-          if (name !== event.target) {
-            name.removeEventListener("click", showPopup);
-          }
-        }
-      }
+    // 名前を表示して、クリックしたらポップアップを表示する処理
+    function displayRandomName() {
+      const nameElement = document.getElementById("name");
+      nameElement.innerText = getRandomName();
+      nameElement.style.left = Math.random() * (window.innerWidth - nameElement.clientWidth) + "px";
+      nameElement.style.top = Math.random() * (window.innerHeight - nameElement.clientHeight) + "px";
+      hidePopup();
     }
 
-    // 0.5秒ごとに新しい名前の表示を開始
-    setInterval(displayRandomName, 500);
+    // ポップアップを表示する処理
+    function showPopup(event) {
+      const nameElement = document.getElementById("name");
+      const clickedName = nameElement.innerText;
+      const personData = data.find((person) => person.name === clickedName);
 
-    // 一定の間隔でポップアップを非表示にする処理
-    setInterval(hidePopup, 3000); // 3000ミリ秒ごとに非表示化（3秒）
+      const popup = document.getElementById("popup");
+      popup.style.display = "block";
+      popup.style.left = event.clientX + "px";
+      popup.style.top = event.clientY + "px";
+
+      const registrationNumberElement = document.getElementById("registrationNumber");
+      const identityElement = document.getElementById("identity");
+      const affiliationElement = document.getElementById("affiliation");
+
+      registrationNumberElement.innerText = "登録番号：" + personData.registrationNumber;
+      identityElement.innerText = "身分：" + personData.identity;
+      affiliationElement.innerText = "所属：" + personData.affiliation;
+    }
 
     // ポップアップを非表示にする処理
     function hidePopup() {
-      isPopupShown = false;
       const popup = document.getElementById("popup");
       popup.style.display = "none";
     }
+
+    // 名前をクリックしたらポップアップ表示の処理を実行
+    document.getElementById("name").addEventListener("click", showPopup);
+
+    // 一定の間隔でランダムな名前を表示する処理
+    setInterval(displayRandomName, 3000); // 3000ミリ秒ごとに更新（3秒）
   </script>
 </body>
 </html>
